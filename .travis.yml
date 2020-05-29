@@ -1,0 +1,22 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t isitavi/multi-container-test  ./client/Dockerfile.dev     ./client
+
+scripts:
+    - docker run -it isitavi/multi-container-test  npm test -- --coverage
+
+after_sucess:
+    - docker build   -t isitavi/multi-client   ./client
+    - docker build   -t isitavi/multi-server   ./server
+    - docker build   -t isitavi/multi-worker   ./worker
+    - docker build   -t isitavi/multi-nginx   ./nginx
+    # Docker HUB Credentials
+    - echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_ID --password-stdin
+    # Push Container to Docker HUB
+    - docker push    isitavi/multi-client   
+    - docker push    isitavi/multi-server   
+    - docker push    isitavi/multi-worker   
+    - docker push   isitavi/multi-nginx   
