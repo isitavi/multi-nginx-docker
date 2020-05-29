@@ -9,14 +9,14 @@ scripts:
     - docker run -it isitavi/multi-container-test  npm test -- --coverage
 
 after_sucess:
-    - docker build   -t isitavi/multi-client   ./client
-    - docker build   -t isitavi/multi-server   ./server
-    - docker build   -t isitavi/multi-worker   ./worker
-    - docker build   -t isitavi/multi-nginx   ./nginx
+    - docker build   -t isitavi/multi-client-v1   ./client
+    - docker build   -t isitavi/multi-server-v1   ./server
+    - docker build   -t isitavi/multi-worker-v1   ./worker
+    - docker build   -t isitavi/multi-nginx-v1   ./nginx
     # Docker HUB Credentials
     - echo "$DOCKER_PASSWORD" | docker login -u  "$DOCKER_ID" --password-stdin
     # Push Container to Docker HUB
-    - docker push    isitavi/multi-client   
-    - docker push    isitavi/multi-server   
-    - docker push    isitavi/multi-worker   
-    - docker push   isitavi/multi-nginx   
+    - docker push    isitavi/multi-client-v1   
+    - docker push    isitavi/multi-server-v1   
+    - docker push    isitavi/multi-worker-v1   
+    - docker push   isitavi/multi-nginx-v1   
