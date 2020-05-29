@@ -14,7 +14,7 @@ after_sucess:
     - docker build   -t isitavi/multi-worker-v1   ./worker
     - docker build   -t isitavi/multi-nginx-v1   ./nginx
     # Docker HUB Credentials
-    - echo "$DOCKER_PASSWORD" | docker login -u  "$DOCKER_ID" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login --username  "$DOCKER_ID" --password-stdin
     # Push Container to Docker HUB
     - docker push    isitavi/multi-client-v1   
     - docker push    isitavi/multi-server-v1   
